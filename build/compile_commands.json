@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/hema/helloSFML/CarSim/build",
-  "command": "/usr/bin/g++-7    -g   -o CMakeFiles/CarSim.dir/CarSim.cpp.o -c /home/hema/helloSFML/CarSim/CarSim.cpp",
-  "file": "/home/hema/helloSFML/CarSim/CarSim.cpp"
-}
-]

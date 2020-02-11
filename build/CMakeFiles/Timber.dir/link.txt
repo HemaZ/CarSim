@@ -1,1 +1,0 @@
-/usr/bin/g++-7  -g  -rdynamic CMakeFiles/Timber.dir/Timber.cpp.o  -o Timber -lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system 
