@@ -1,0 +1,1 @@
+/usr/bin/g++-7  -g  -rdynamic CMakeFiles/CarSim.dir/CarSim.cpp.o  -o CarSim -lsfml-network -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system 

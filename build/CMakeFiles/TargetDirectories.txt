@@ -1,0 +1,3 @@
+/home/hema/helloSFML/CarSim/build/CMakeFiles/rebuild_cache.dir
+/home/hema/helloSFML/CarSim/build/CMakeFiles/CarSim.dir
+/home/hema/helloSFML/CarSim/build/CMakeFiles/edit_cache.dir
