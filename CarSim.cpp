@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -21,6 +22,17 @@ int main() {
   Font font;
   font.loadFromFile("fonts/KOMIKAP_.ttf");
  
+
+  
+  // Prepare the sound
+	SoundBuffer carBuffer;
+	carBuffer.loadFromFile("sound/car.wav");
+	Sound carsound;
+	carsound.setBuffer(carBuffer);
+  carsound.setVolume(10);
+  // carsound.setLoop(true);
+  
+  // carsound.play();
   Text title;
   title.setString("Monofya CarSim");
   title.setCharacterSize(75);
@@ -84,7 +96,13 @@ int main() {
     if(carX>1280){
         carX = 0;
     }
+    // carsound.setPosition(carX, carY, 0);
     spriteCar.setPosition(carX, carY);
+    if(carsound.getStatus()!=carsound.Playing){
+      carsound.play();
+    }
+    
+    
   }
     if(Keyboard::isKeyPressed(Keyboard::S)){
     carX -= carSpeed * cos((spriteCar.getRotation()*M_PI)/180) ;
@@ -126,7 +144,9 @@ int main() {
     window.draw(title);
     window.draw(carPos);
     window.draw(spriteCar);
+    
     window.display();
+    carsound.pause();
     // renderTheScene(window, gameSprites);
   }
 
