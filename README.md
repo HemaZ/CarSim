@@ -1,6 +1,6 @@
 # CarSim V0.1
 ### A Simple Car Simulator based on SFML Library
-![screenshot](Screenshot.png)
+![screenshot](Screenshot.gif)
 
 #### Dependencies
 `sudo apt install libsfml-dev`

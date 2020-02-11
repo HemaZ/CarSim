@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
+#include <string>
+#include <sstream>
 #include <vector>
 using namespace sf;
 
@@ -15,7 +18,21 @@ int main() {
   RenderWindow window(VideoMode(1280, 720), "CarSim!");
   View view(FloatRect(0, 0, 1280, 720));
   window.setView(view);
+  Font font;
+  font.loadFromFile("fonts/KOMIKAP_.ttf");
+ 
+  Text title;
+  title.setString("Monofya CarSim");
+  title.setCharacterSize(75);
+  title.setFont(font);
+  title.setPosition(350, 330);
 
+  Text carPos;
+  
+  carPos.setCharacterSize(20);
+  carPos.setFont(font);
+  carPos.setPosition(0, 680);
+  
   // Add The Game Background
   Texture textureBg;
   textureBg.loadFromFile("graphics/bg.png");
@@ -37,6 +54,12 @@ int main() {
 
   Clock clock;
 
+
+  
+  
+ 
+
+
   while (window.isOpen()) {
 
     /*
@@ -46,27 +69,44 @@ int main() {
     */
     if (Keyboard::isKeyPressed(Keyboard::Escape)) {
       window.close(); // close the game if the player pressed ESC
-    } else if (Keyboard::isKeyPressed(Keyboard::W)) {
-      std::cout << "Moving Forward " << std::endl;
-      Time dt = clock.restart();
-      carX += carSpeed;
-      if(carX>1280){
-          carX = 0;
-      }
+    } 
+    if(Keyboard::isKeyPressed(Keyboard::BackSpace)){
+      carX = 560;
+      carY = 517;
       spriteCar.setPosition(carX, carY);
-    }else if(Keyboard::isKeyPressed(Keyboard::S)){
-      carX -= carSpeed;
-      if(carX<0){
-          carX = 1280;
-      }
-      spriteCar.setPosition(carX, carY);
-    }else if(Keyboard::isKeyPressed(Keyboard::Q)){
-
-    spriteCar.rotate(-0.1);
-    }else if(Keyboard::isKeyPressed(Keyboard::E)){
-    spriteCar.rotate(+0.1);
+      spriteCar.setRotation(0);
     }
-    /*
+    if(Keyboard::isKeyPressed(Keyboard::W)) {
+    std::cout << "Moving Forward " << std::endl;
+    Time dt = clock.restart();
+    carX += carSpeed * cos((spriteCar.getRotation()*M_PI)/180) ;
+    carY += carSpeed * sin((spriteCar.getRotation()*M_PI)/180) ;
+    if(carX>1280){
+        carX = 0;
+    }
+    spriteCar.setPosition(carX, carY);
+  }
+    if(Keyboard::isKeyPressed(Keyboard::S)){
+    carX -= carSpeed * cos((spriteCar.getRotation()*M_PI)/180) ;
+    carY -= carSpeed * sin((spriteCar.getRotation()*M_PI)/180) ;
+    if(carX<0){
+        carX = 1280;
+    }
+    spriteCar.setPosition(carX, carY);
+  }
+  if(Keyboard::isKeyPressed(Keyboard::Q)){
+
+  spriteCar.rotate(-0.05);
+  }
+    if(Keyboard::isKeyPressed(Keyboard::E)){
+  spriteCar.rotate(+0.05);
+  }
+  
+  if(Keyboard::isKeyPressed(Keyboard::Up)){
+  carSpeed += 0.001;
+  }
+
+  /*
     ****************************
     Update the scene
     ****************************
@@ -78,8 +118,13 @@ int main() {
     Draw the scene
     ****************************
     */
+    std::stringstream ss;
+    ss << "Car Position:  X= " << carX << "  Y= " << carY;
+    carPos.setString(ss.str());
     window.clear();
     window.draw(sprtieBg);
+    window.draw(title);
+    window.draw(carPos);
     window.draw(spriteCar);
     window.display();
     // renderTheScene(window, gameSprites);
