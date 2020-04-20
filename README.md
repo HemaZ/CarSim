@@ -1,5 +1,5 @@
-# CarSim V0.1
-### A Simple Car Simulator based on SFML Library
+# Hema's CarSim V0.1
+### A Simple Car Simulator based on SFML Library for Udacity C++ NanoDegree Capstone Project.
 ![screenshot](Screenshot.gif)
 
 #### Dependencies
@@ -10,3 +10,9 @@
 * `cd build && cmake ..`
 * `make`
 * `./CarSim`
+
+### How to Drive:
+* Q -> Steer Left
+* E -> Steer Right
+* Arrow Up -> Increase Speed
+* Backspace -> Reset

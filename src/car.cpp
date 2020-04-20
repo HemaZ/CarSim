@@ -5,13 +5,14 @@ Car::Car() {
   _sprite.setTexture(_textCar);
   _x = 560;
   _y = 517;
-  _speed = 1;
+  _speed = 1.5;
   _sprite.setPosition(_x, _y);
 }
 
 void Car::Reset() {
   _x = 560;
   _y = 517;
+  _speed = 1.5;
   _sprite.setPosition(_x, _y);
   _sprite.setRotation(0);
 }
@@ -23,11 +24,7 @@ void Car::MoveFW() {
   if (_x > 1280) {
     _x = 0;
   }
-  // carsound.setPosition(carX, carY, 0);
   _sprite.setPosition(_x, _y);
-  //   if (carsound.getStatus() != carsound.Playing) {
-  //     carsound.play();
-  //   }
   std::cout << " X: " << _x << "  Y: " << _y << std::endl;
 }
 

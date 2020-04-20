@@ -3,7 +3,8 @@
 Renderer::Renderer(int h, int w) : _height(h), _width(w) {
 
   _window =
-      std::make_unique<RenderWindow>(VideoMode(_width, _height), "CarSim!");
+      std::make_shared<RenderWindow>(VideoMode(_width, _height), "CarSim!");
+  _window->setFramerateLimit(30);
   View view(FloatRect(0, 0, _width, _height));
   _window->setView(view);
 
@@ -26,6 +27,9 @@ Renderer::Renderer(int h, int w) : _height(h), _width(w) {
 
 void Renderer::Render(Car &car) {
   _window->clear();
+  std::stringstream ss;
+  ss << "Car Position:  X= " << (int)car._x << "  Y= " << (int)car._y;
+  _carPos.setString(ss.str());
   _window->draw(_sprtieBg);
   _window->draw(_title);
   _window->draw(_carPos);
