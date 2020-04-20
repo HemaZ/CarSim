@@ -1,6 +1,8 @@
 #include "game.h"
-Game::Game(int height, int width) : _height(height), _width(width) {
+Game::Game(int height, int width, ros::NodeHandle &nh)
+    : _height(height), _width(width) {
 
+  _sub = nh.subscribe("/CarSim/steer", 10, &Game::_clbk, this);
   Renderer rnd(height, width);
   _play = true;
   Run(rnd);
@@ -38,10 +40,9 @@ void Game::Run(Renderer &rnd) {
       }
     }
     LimitWorld();
+    ros::spinOnce();
     rnd.Render(_car);
     sf::Time elapsed1 = clock.getElapsedTime();
-    // std::cout << "Sleeping for " << 33 - elapsed1.asMilliseconds() <<
-    // std::endl;
     std::this_thread::sleep_for(
         std::chrono::milliseconds(33 - elapsed1.asMilliseconds()));
   }
@@ -60,4 +61,8 @@ void Game::LimitWorld() {
   if (_car._y < 0) {
     _car._y = _height;
   }
+}
+
+void Game::_clbk(const std_msgs::Float32::ConstPtr &msg) {
+  _car.Rotate(msg->data);
 }

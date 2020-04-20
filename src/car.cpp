@@ -18,14 +18,14 @@ void Car::Reset() {
 }
 
 void Car::MoveFW() {
-  std::cout << "Moving Forward ";
+  // std::cout << "Moving Forward ";
   _x += _speed * cos((_sprite.getRotation() * M_PI) / 180);
   _y += _speed * sin((_sprite.getRotation() * M_PI) / 180);
   if (_x > 1280) {
     _x = 0;
   }
   _sprite.setPosition(_x, _y);
-  std::cout << " X: " << _x << "  Y: " << _y << std::endl;
+  // std::cout << " X: " << _x << "  Y: " << _y << std::endl;
 }
 
 void Car::MoveBW() {
