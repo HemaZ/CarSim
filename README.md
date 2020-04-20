@@ -11,6 +11,7 @@ A Simple Car Simulator based on SFML Library and ROS for Udacity C++ NanoDegree 
 ## How To Run:
 * `cd build && cmake ..`
 * `make`
+* Launch a ROS master `$ roscore`
 * `./CarSim`
 
 ## How to Drive Manually:
@@ -20,7 +21,8 @@ A Simple Car Simulator based on SFML Library and ROS for Udacity C++ NanoDegree 
 * Backspace -> Reset
 
 ## How to Drive using ROS:
-* Publish `std_msgs/Float32` on Topic `/CarSim/steer` values [-10,10]
+* Publish `std_msgs/Float32` on Topic `/CarSim/steer` values [-360,360]
+* `$ rostopic pub /CarSim/steer std_msgs/Float32 "data: 5.0" `
 
 ## Project Structure:
 * CarSim.cpp 
