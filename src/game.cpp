@@ -3,6 +3,7 @@ Game::Game(int height, int width, ros::NodeHandle &nh)
     : _height(height), _width(width) {
 
   _sub = nh.subscribe("/CarSim/steer", 10, &Game::_clbk, this);
+  _pub = nh.advertise<sensor_msgs::Image>("/CarSim/image", 30);
   Renderer rnd(height, width);
   _play = true;
   Run(rnd);
@@ -42,6 +43,8 @@ void Game::Run(Renderer &rnd) {
     LimitWorld();
     ros::spinOnce();
     rnd.Render(_car);
+    Image screen = rnd._window->capture();
+    _pub.publish(*windowToROS(screen));
     sf::Time elapsed1 = clock.getElapsedTime();
     std::this_thread::sleep_for(
         std::chrono::milliseconds(33 - elapsed1.asMilliseconds()));
